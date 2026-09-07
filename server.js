@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import Anthropic from "@anthropic-ai/sdk";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -48,6 +50,15 @@ app.post("/api/sugerir", async (req, res) => {
     });
   }
 });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, "dist")));
+
+app.get("/{*splat}", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 
 app.listen(PORT, () => {
   console.log(`Servidor Claude funcionando en http://localhost:${PORT}`);
