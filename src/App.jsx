@@ -88,7 +88,7 @@ ${JSON.stringify(catalogoLigero)}
 
 Selecciona las actividades aplicables y estima cantidades, en el formato JSON indicado.`;
 
-            const response = await fetch("http://localhost:3001/api/sugerir", {
+           const response = await fetch("/api/sugerir", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
